@@ -1100,11 +1100,11 @@ function Modal({ step, setStep, mobile, setMobile, otp, setOtp, form, setForm, l
                         <h2 className="text-3xl font-bold text-[#b20000] mb-4">
                             Thank You!
                         </h2>
-                        <p className="text-gray-700 text-lg mb-2">
-                            Your details have been saved successfully.
+                         <p className="text-gray-700 text-lg mb-2">
+                            Kindly check the given link to grow your GBP.
                         </p>
                         <p className="text-gray-600 text-sm mb-6">
-                            We will get back to you in just <strong>5 minutes</strong>.
+                        <a href="https://rw.luomo.co.in" target="_blank" rel="noopener noreferrer" className="text-[#b20000] hover:underline">https://rw.luomo.co.in</a>
                         </p>
                         <button
                             onClick={close}
