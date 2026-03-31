@@ -11,10 +11,11 @@ import {
     Loader2
 } from "lucide-react";
 
-import { TypeAnimation } from "react-type-animation";
+import { ChevronDown } from "lucide-react"
 
 import { motion } from "framer-motion";
-import { sendOtp, verifyOtp, saveDetails } from "./authApi";
+import { saveDetails } from "./authApi";
+import PricingPage from "./Pricing";
 
 export default function Luomo() {
 
@@ -22,7 +23,6 @@ export default function Luomo() {
     const [showModal, setShowModal] = useState(false);
     const [step, setStep] = useState(1);
     const [mobile, setMobile] = useState("");
-    const [otp, setOtp] = useState("");
     const [form, setForm] = useState({
         name: "",
         business: "",
@@ -37,32 +37,32 @@ export default function Luomo() {
         {
             icon: <Bot className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#b20000]" />,
             title: "AI Auto Review Replies",
-            desc: "Understands sentiment, tone & language to craft perfect human-like replies for all reviews."
+            desc: "Automatically reply to customer reviews with human-like responses based on sentiment, intent, tone, and language."
         },
         {
             icon: <Image className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#b20000]" />,
-            title: "Bulk Media Posting",
-            desc: "Upload multiple images/videos, schedule them, and let AI optimize captions."
+            title: "AI Google Post Creation",
+            desc: "Generate engaging Google Business posts with optimized captions, offers, updates, and visual-ready content in seconds."
         },
         {
             icon: <Zap className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#b20000]" />,
-            title: "Smart Delay Engine",
-            desc: "Choose natural reply times so responses look organic and human."
+            title: "Smart Auto Publishing",
+            desc: "Schedule and publish posts automatically at the right time to keep your profile active and consistent without manual effort."
         },
         {
             icon: <Search className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#b20000]" />,
             title: "Competitor Intelligence",
-            desc: "AI scans your competitors and gives insights to outrank them."
+            desc: "Track nearby competitors, analyze their activity, and discover opportunities to improve your Google visibility and local ranking."
         },
         {
             icon: <Workflow className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#b20000]" />,
-            title: "Multi-Location Control",
-            desc: "Manage all your branches from one dashboard with automation."
+            title: "Multi-Location Management",
+            desc: "Manage multiple business locations from one dashboard with centralized automation, posting, and review management."
         },
         {
             icon: <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#b20000]" />,
-            title: "SEO-Boosted Replies",
-            desc: "AI adds local SEO keywords to help you rank higher on Google Maps."
+            title: "SEO-Optimized Content",
+            desc: "Boost your Google Business Profile with AI-generated posts and replies optimized using local SEO and customer search keywords."
         }
     ];
 
@@ -73,28 +73,82 @@ export default function Luomo() {
         { number: "03", title: "AI Runs Everything", desc: "Replies, posts, insights - all done automatically." }
     ];
 
-    /* PRICING JSON */
-    const pricingPlans = [
+    const stats = [
         {
-            name: "Free Plan",
-            price: "₹0",
-            duration: "Forever Free",
-            features: ["Basic AI Replies", "Limited Media Posting", "Basic Analytics"]
+            value: "700+",
+            label: "Businesses Listed",
+            desc: "Trusted by local businesses using AI to manage and grow their Google Business Profile."
         },
         {
-            name: "Monthly Plan",
-            price: "199",
-            duration: "per month",
-            features: ["Unlimited AI Replies", "Advanced Posting", "Competitor Insights", "Full Analytics"]
+            value: "10K+",
+            label: "Reviews Replied",
+            desc: "AI-powered review responses generated with intent, tone, and language understanding."
         },
         {
-            name: "Yearly Plan",
-            price: "1999",
-            duration: "per year",
-            isOffer: true,
-            features: ["Everything in Monthly", "2 Months Free", "Priority Support"]
+            value: "5K+",
+            label: "Google Posts Created",
+            desc: "Businesses stay active on Google with consistent AI-generated posts and updates."
+        },
+        {
+            value: "24/7",
+            label: "Automation Running",
+            desc: "Your Google Business Profile stays active around the clock without manual effort."
         }
     ];
+
+    const faqs = [
+        {
+            question: "How does the AI help grow my Google Business Profile?",
+            answer:
+                "Our AI helps keep your Google Business Profile active and optimized by automatically generating posts, replying to reviews intelligently, and using relevant local SEO keywords to improve visibility and engagement."
+        },
+        {
+            question: "Can the AI automatically reply to customer reviews?",
+            answer:
+                "Yes. The AI can generate smart, human-like replies based on the review’s sentiment, tone, intent, and language. This helps you respond faster while maintaining a professional and natural brand voice."
+        },
+        {
+            question: "Will the replies sound robotic or generic?",
+            answer:
+                "No. The system is designed to create natural, contextual, and human-like replies instead of repetitive or robotic responses. Higher plans also support more personalized and brand-tone-based replies."
+        },
+        {
+            question: "Can it create and publish Google Business posts automatically?",
+            answer:
+                "Yes. Depending on your plan, the platform can generate Google Business Profile posts, optimize them with keywords, and schedule or publish them automatically to keep your profile active."
+        },
+        {
+            question: "Does it support multiple business locations?",
+            answer:
+                "Yes. Our Business plan supports multi-location management, allowing you to manage posting, reviews, and growth activity for multiple Google Business Profiles from one dashboard."
+        },
+        {
+            question: "How does competitor analytics work?",
+            answer:
+                "The platform analyzes nearby competitors and their Google Business activity to help you identify opportunities, understand local competition, and improve your own profile strategy."
+        },
+        {
+            question: "Can the AI reply in different languages?",
+            answer:
+                "Yes. The AI can understand and generate replies based on the language and intent of the customer review, helping you communicate more naturally with a wider audience."
+        },
+        {
+            question: "Do I need technical knowledge to use this platform?",
+            answer:
+                "No. The platform is built for business owners, marketers, and teams who want to grow their Google presence without needing technical or SEO expertise."
+        },
+        {
+            question: "Is my Google Business Profile safe to connect?",
+            answer:
+                "Yes. We focus on secure integrations and smart automation designed to help you manage your Google Business Profile more efficiently while maintaining control over your business presence."
+        },
+        {
+            question: "Can I upgrade my plan later?",
+            answer:
+                "Absolutely. You can start with the plan that fits your business today and upgrade anytime as your needs grow."
+        }
+    ];
+
 
     const reviews = [
         {
@@ -517,7 +571,188 @@ export default function Luomo() {
             review: "Every feature works flawlessly. My Ayurvedic clinic's Google presence is now professional and engaging.",
             rating: 5,
         },
+        {
+            id: 71,
+            name: "Rakesh Solanki",
+            review: "My pathology lab receives many patient reviews daily. This tool helps us respond quickly and professionally without extra staff.",
+            rating: 5,
+        },
+        {
+            id: 72,
+            name: "Nupur Bedi",
+            review: "The AI-generated posts saved my boutique from going inactive on Google. Super useful and easy to manage.",
+            rating: 5,
+        },
+        {
+            id: 73,
+            name: "Faizan Ali",
+            review: "My car detailing studio now looks much more active online. Reviews and posts are finally handled consistently.",
+            rating: 5,
+        },
+        {
+            id: 74,
+            name: "Pooja Nanda",
+            review: "I run a skin clinic and this tool saves me hours every week. Replies are respectful, warm, and never robotic.",
+            rating: 5,
+        },
+        {
+            id: 75,
+            name: "Himanshu Sethi",
+            review: "Very helpful for my local electronics showroom. Customers notice that we reply fast and that builds trust.",
+            rating: 5,
+        },
+        {
+            id: 76,
+            name: "Ritu Malhotra",
+            review: "The review reply quality is honestly better than what my team used to write manually.",
+            rating: 5,
+        },
+        {
+            id: 77,
+            name: "Abhishek Nair",
+            review: "My dental clinic gets multilingual reviews, and this tool handles them surprisingly well.",
+            rating: 5,
+        },
+        {
+            id: 78,
+            name: "Nidhi Bansal",
+            review: "The competitor insights gave me a better idea of how nearby salons were staying more active than us.",
+            rating: 4,
+        },
+        {
+            id: 79,
+            name: "Rohit Malpani",
+            review: "Simple setup, clean dashboard, and useful automation. Great for busy business owners.",
+            rating: 5,
+        },
+        {
+            id: 80,
+            name: "Shreya Kapoor",
+            review: "Our café started looking much more responsive online after we connected this tool.",
+            rating: 5,
+        },
+        {
+            id: 81,
+            name: "Devansh Arora",
+            review: "The AI understands whether a customer is happy, upset, or just giving feedback. Very smart system.",
+            rating: 5,
+        },
+        {
+            id: 82,
+            name: "Mitali Shah",
+            review: "I use it for my beauty studio and the auto replies sound natural enough that customers think I wrote them.",
+            rating: 5,
+        },
+        {
+            id: 83,
+            name: "Sahil Bhat",
+            review: "The scheduling feature alone is worth it. My profile stays active even when I forget to post.",
+            rating: 5,
+        },
+        {
+            id: 84,
+            name: "Anusha Iyer",
+            review: "As a preschool owner, I don’t have time to manage Google updates regularly. This tool solved that problem.",
+            rating: 5,
+        },
+        {
+            id: 85,
+            name: "Nitin Chawla",
+            review: "It helped my hardware business maintain a much more professional image online.",
+            rating: 5,
+        },
+        {
+            id: 86,
+            name: "Kritika Sood",
+            review: "The replies are polite, personalized, and surprisingly relevant. Very useful for service businesses.",
+            rating: 5,
+        },
+        {
+            id: 87,
+            name: "Aman Khurana",
+            review: "My gym’s Google profile finally looks active and managed properly. Big improvement in consistency.",
+            rating: 5,
+        },
+        {
+            id: 88,
+            name: "Saloni Verma",
+            review: "I liked that it doesn’t just automate blindly — the responses still feel thoughtful.",
+            rating: 5,
+        },
+        {
+            id: 89,
+            name: "Naveena Pillai",
+            review: "The AI posting feature is excellent for my bakery. Offers and updates now go live without effort.",
+            rating: 5,
+        },
+        {
+            id: 90,
+            name: "Tarun Sikka",
+            review: "This has been very helpful for my furniture store. Great value compared to hiring someone just for profile management.",
+            rating: 5,
+        },
+        {
+            id: 91,
+            name: "Ira Banerjee",
+            review: "The language understanding is genuinely impressive. It handles customer tone much better than expected.",
+            rating: 5,
+        },
+        {
+            id: 92,
+            name: "Mukul Tandon",
+            review: "Our repair center gets many repetitive reviews, and this tool still manages to keep replies fresh and relevant.",
+            rating: 5,
+        },
+        {
+            id: 93,
+            name: "Pallak Arora",
+            review: "My makeup studio’s Google page feels much more alive now. Great for keeping customer engagement strong.",
+            rating: 5,
+        },
+        {
+            id: 94,
+            name: "Harshit Dhingra",
+            review: "Competitor benchmarking helped me understand why other local shops were ranking above mine.",
+            rating: 4,
+        },
+        {
+            id: 95,
+            name: "Rachna Joshi",
+            review: "Very practical product. It removes repetitive work and keeps my business looking responsive online.",
+            rating: 5,
+        },
+        {
+            id: 96,
+            name: "Sourabh Goyal",
+            review: "The support team was helpful and setup was smooth. Connected my profile in minutes.",
+            rating: 5,
+        },
+        {
+            id: 97,
+            name: "Megha Venkatesh",
+            review: "I use this for my wellness clinic and the review replies have definitely improved our online impression.",
+            rating: 5,
+        },
+        {
+            id: 98,
+            name: "Varun Kaul",
+            review: "Good automation, clean interface, and useful posting tools. Solid product overall.",
+            rating: 5,
+        },
+        {
+            id: 99,
+            name: "Ishaani Roy",
+            review: "The AI sounds professional without feeling too formal. Perfect for my boutique hotel.",
+            rating: 5,
+        },
+        {
+            id: 100,
+            name: "Prateek Sehgal",
+            review: "If you want to stay active on Google without manually doing everything, this tool is genuinely worth trying.",
+            rating: 5,
+        },
     ];
+
     return (
         <div className="min-h-screen bg-white text-gray-900 font-inter overflow-x-hidden">
 
@@ -589,20 +824,60 @@ export default function Luomo() {
                     </div>
                 </section>
 
+                {/* TRUST / STATS SECTION */}
+                <section className="px-6 md:px-20 py-14 bg-white border-t border-b">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="text-center mb-12">
+                            <p className="text-sm font-semibold tracking-widest uppercase text-[#b20000] mb-3">
+                                Trusted by Growing Businesses
+                            </p>
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                                Helping Businesses Stay Active and Visible on Google
+                            </h2>
+                            <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+                                From review replies to automated posting, businesses are already using our AI tools
+                                to save time, improve engagement, and grow their Google Business Profile.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                            {stats.map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="bg-gray-50 border rounded-2xl p-6 md:p-8 text-center shadow-sm hover:shadow-md transition"
+                                >
+                                    <h3 className="text-3xl md:text-4xl font-extrabold text-[#b20000] mb-2">
+                                        {item.value}
+                                    </h3>
+                                    <p className="text-gray-800 font-semibold mb-2">{item.label}</p>
+                                    <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
 
                 {/* FEATURES */}
-                <section id="features" className="px-6 md:px-20 md:py-24 py-4 bg-gray-50 border-t">
-                    <h2 className="text-[29px] sm:text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
-                        AI Tools That Work While You Grow
-                    </h2>
+                <section id="features" className="px-6 md:px-20 md:py-24 py-12 bg-gray-50 border-t">
+                    <div className="max-w-4xl mx-auto text-center mb-14">
+                        <p className="text-sm font-semibold tracking-widest uppercase text-[#b20000] mb-3">
+                            Powerful AI Features
+                        </p>
+                        <h2 className="text-[29px] sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            AI Tools Built to Grow Your Google Business Profile
+                        </h2>
+                        <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+                            Automate posting, reply to reviews intelligently, outrank competitors,
+                            and keep your Google Business Profile active - all from one smart dashboard.
+                        </p>
+                    </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 max-w-6xl mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
                         {features.map((item, i) => (
                             <FeatureCard key={i} icon={item.icon} title={item.title} desc={item.desc} />
                         ))}
                     </div>
                 </section>
-
 
                 {/* HOW IT WORKS */}
                 <section id="how" className="px-6 md:px-20 py-24">
@@ -616,43 +891,8 @@ export default function Luomo() {
                 </section>
 
                 {/* ⭐⭐⭐ PRICING SECTION ADDED HERE ⭐⭐⭐ */}
-                <section id="pricing" className="px-6 md:px-20 py-20 bg-gray-50 ">
-                    <h2 className="text-4xl font-bold text-center mb-12">Pricing Plans</h2>
-
-                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-
-                        {pricingPlans.map((plan, i) => (
-                            <div key={i} className="border rounded-xl p-8 shadow-sm hover:shadow-md transition relative">
-                                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                                <p className="text-3xl font-extrabold text-[#b20000] mb-1">{plan.price}</p>
-                                <p className="text-sm text-gray-500 mb-6">{plan.duration}</p>
-
-                                <ul className="text-gray-700 space-y-2 mb-6">
-                                    {plan.features.map((f, idx) => (
-                                        <li key={idx}><span className="mr-2 text-lg">🗸</span>{f}</li>
-                                    ))}
-                                </ul>
-
-                                <button
-                                    onClick={() => setShowModal(true)}
-                                    className="w-full px-6 py-3 bg-[#b20000] hover:bg-red-700 text-white rounded-md"
-                                >
-                                    Choose Plan
-                                </button>
-                                <div>
-                                    <div className={`${plan.isOffer ? 'block' : 'hidden'} absolute top-0 right-0 bg-[#b20000] text-white text-xs font-bold px-3 py-1 rounded-tr-xl rounded-bl-xl`}>
-                                        Most Popular <br /> Up to 45% Off
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-
-                    </div>
-                </section>
+                <PricingPage />
                 {/* ⭐⭐⭐ END PRICING SECTION ⭐⭐⭐ */}
-
-
-
 
                 <section className="w-full py-20 bg-white overflow-hidden">
                     <h2 className="text-4xl font-bold text-center mb-12">Loved by Our Customers</h2>
@@ -717,7 +957,27 @@ export default function Luomo() {
                     </div>
                 </section>
 
+                {/* FAQ SECTION */}
+                <section id="faq" className="px-6 md:px-20 py-20 bg-gray-50 border-t">
+                    <div className="max-w-4xl mx-auto text-center mb-14">
+                        <p className="text-sm font-semibold tracking-widest uppercase text-[#b20000] mb-3">
+                            Frequently Asked Questions
+                        </p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            Everything You Need to Know
+                        </h2>
+                        <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+                            Learn how our AI helps automate and grow your Google Business Profile
+                            with smarter posting, review replies, and local visibility tools.
+                        </p>
+                    </div>
 
+                    <div className="max-w-4xl mx-auto space-y-4">
+                        {faqs.map((faq, i) => (
+                            <FaqItem key={i} question={faq.question} answer={faq.answer} />
+                        ))}
+                    </div>
+                </section>
 
                 {/* CTA */}
                 <section
@@ -741,7 +1001,6 @@ export default function Luomo() {
                     </div>
                 </section>
 
-
                 {/* MODAL */}
                 {showModal && (
                     <Modal
@@ -749,8 +1008,6 @@ export default function Luomo() {
                         setStep={setStep}
                         mobile={mobile}
                         setMobile={setMobile}
-                        otp={otp}
-                        setOtp={setOtp}
                         form={form}
                         setForm={setForm}
                         loading={loading}
@@ -761,7 +1018,6 @@ export default function Luomo() {
                             setShowModal(false);
                             setStep(1);
                             setMobile("");
-                            setOtp("");
                             setForm({ name: "", business: "", location: "", email: "" });
                             setError("");
                         }}
@@ -838,47 +1094,14 @@ function Navbar({ openModal }) {
 
 
 /* =============== MODAL =============== */
-function Modal({ step, setStep, mobile, setMobile, otp, setOtp, form, setForm, loading, setLoading, error, setError, close }) {
+function Modal({ step, setStep, mobile, setMobile, form, setForm, loading, setLoading, error, setError, close }) {
 
-    const handleSendOtp = async () => {
-        if (mobile.length !== 10) {
+    const handleSaveDetails = async () => {
+        if (!mobile || mobile.length !== 10) {
             setError("Please enter a valid 10-digit mobile number");
             return;
         }
 
-        setError("");
-        setLoading(true);
-
-        try {
-            await sendOtp({ phone: mobile });
-            setStep(2);
-        } catch (err) {
-            setError(typeof err === 'string' ? err : "Failed to send OTP. Please try again.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleVerifyOtp = async () => {
-        if (otp.length !== 6) {
-            setError("Please enter a valid 6-digit OTP");
-            return;
-        }
-
-        setError("");
-        setLoading(true);
-
-        try {
-            await verifyOtp({ phone: mobile, userOtp: otp });
-            setStep(3);
-        } catch (err) {
-            setError(typeof err === 'string' ? err : "Invalid OTP. Please try again.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleSaveDetails = async () => {
         if (!form.name || !form.business || !form.location) {
             setError("Please fill in all required fields");
             return;
@@ -895,7 +1118,7 @@ function Modal({ step, setStep, mobile, setMobile, otp, setOtp, form, setForm, l
                 location: form.location,
                 email: form.email || ""
             });
-            setStep(4);
+            setStep(2); // Success step
         } catch (err) {
             setError(typeof err === 'string' ? err : "Failed to save details. Please try again.");
         } finally {
@@ -921,175 +1144,102 @@ function Modal({ step, setStep, mobile, setMobile, otp, setOtp, form, setForm, l
                     </div>
                 )}
 
-                {/* STEP 1 */}
+                {/* STEP 1: Registration Form */}
                 {step === 1 && (
                     <>
-                        <h2 className="text-2xl font-bold mb-4">Enter Mobile Number</h2>
-                        <input
-                            type="tel"
-                            value={mobile}
-                            onChange={(e) => {
-                                const value = e.target.value.replace(/\D/g, '').slice(0, 10);
-                                setMobile(value);
-                                setError("");
-                            }}
-                            className="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-[#b20000]"
-                            placeholder="Enter your 10-digit mobile number"
-                            maxLength={10}
-                            disabled={loading}
-                        />
+                        <h2 className="text-2xl font-bold mb-4 text-[#b20000]">Start Your Free Trial</h2>
+                        <p className="text-sm text-gray-600 mb-6">Enter your details to get started</p>
+
+                        <div className="space-y-3 mb-6">
+                            <div className="relative">
+                                <input
+                                    type="tel"
+                                    value={mobile}
+                                    onChange={(e) => {
+                                        const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                                        setMobile(value);
+                                        setError("");
+                                    }}
+                                    className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[#b20000]"
+                                    placeholder="Mobile Number *"
+                                    maxLength={10}
+                                    disabled={loading}
+                                />
+                                <span className="absolute right-3 top-3 text-xs text-gray-400">10 digits</span>
+                            </div>
+
+                            <input
+                                type="text"
+                                placeholder="Full Name *"
+                                value={form.name}
+                                onChange={(e) => {
+                                    setForm({ ...form, name: e.target.value });
+                                    setError("");
+                                }}
+                                className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[#b20000]"
+                                disabled={loading}
+                            />
+
+                            <input
+                                type="text"
+                                placeholder="Business Name *"
+                                value={form.business}
+                                onChange={(e) => {
+                                    setForm({ ...form, business: e.target.value });
+                                    setError("");
+                                }}
+                                className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[#b20000]"
+                                disabled={loading}
+                            />
+
+                            <input
+                                type="text"
+                                placeholder="Location *"
+                                value={form.location}
+                                onChange={(e) => {
+                                    setForm({ ...form, location: e.target.value });
+                                    setError("");
+                                }}
+                                className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[#b20000]"
+                                disabled={loading}
+                            />
+
+                            <input
+                                type="email"
+                                placeholder="Email (Optional)"
+                                value={form.email}
+                                onChange={(e) => {
+                                    setForm({ ...form, email: e.target.value });
+                                    setError("");
+                                }}
+                                className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[#b20000]"
+                                disabled={loading}
+                            />
+                        </div>
+
                         <button
-                            onClick={handleSendOtp}
-                            disabled={loading || mobile.length !== 10}
-                            className="px-6 py-3 bg-[#b20000] text-white rounded w-full hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            onClick={handleSaveDetails}
+                            disabled={loading || !mobile || mobile.length !== 10 || !form.name || !form.business || !form.location}
+                            className="px-6 py-3 bg-[#b20000] text-white rounded w-full font-semibold hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition"
                         >
                             {loading ? (
                                 <>
                                     <Loader2 className="w-5 h-5 animate-spin" />
-                                    Sending...
+                                    Submitting...
                                 </>
                             ) : (
-                                "Send OTP"
+                                "Get Started Now"
                             )}
                         </button>
-                    </>
-                )}
-
-                {/* STEP 2 */}
-                {step === 2 && (
-                    <>
-                        <h2 className="text-2xl font-bold mb-4">Enter OTP</h2>
-                        <p className="text-sm text-gray-600 mb-4">
-                            We sent a 6-digit OTP to <strong>{mobile}</strong>
+                        <p className="mt-4 text-[10px] text-gray-500">
+                            By clicking, you agree to our Terms of Service and Privacy Policy.
                         </p>
-                        <input
-                            type="text"
-                            value={otp}
-                            onChange={(e) => {
-                                const value = e.target.value.replace(/\D/g, '').slice(0, 6);
-                                setOtp(value);
-                                setError("");
-                            }}
-                            className="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-[#b20000] text-center text-2xl tracking-widest"
-                            placeholder="000000"
-                            maxLength={6}
-                            disabled={loading}
-                        />
-                        <div className="flex gap-2">
-                            <button
-                                onClick={() => {
-                                    setStep(1);
-                                    setOtp("");
-                                    setError("");
-                                }}
-                                className="px-6 py-3 bg-gray-200 text-gray-700 rounded w-full hover:bg-gray-300"
-                                disabled={loading}
-                            >
-                                Back
-                            </button>
-                            <button
-                                onClick={handleVerifyOtp}
-                                disabled={loading || otp.length !== 6}
-                                className="px-6 py-3 bg-[#b20000] text-white rounded w-full hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                            >
-                                {loading ? (
-                                    <>
-                                        <Loader2 className="w-5 h-5 animate-spin" />
-                                        Verifying...
-                                    </>
-                                ) : (
-                                    "Verify OTP"
-                                )}
-                            </button>
-                        </div>
                     </>
                 )}
 
-                {/* STEP 3 */}
-                {step === 3 && (
-                    <>
-                        <h2 className="text-2xl font-bold mb-4">Your Details</h2>
-
-                        <input
-                            type="text"
-                            placeholder="Full Name *"
-                            value={form.name}
-                            onChange={(e) => {
-                                setForm({ ...form, name: e.target.value });
-                                setError("");
-                            }}
-                            className="w-full p-3 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-[#b20000]"
-                            disabled={loading}
-                        />
-
-                        <input
-                            type="text"
-                            placeholder="Business Name *"
-                            value={form.business}
-                            onChange={(e) => {
-                                setForm({ ...form, business: e.target.value });
-                                setError("");
-                            }}
-                            className="w-full p-3 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-[#b20000]"
-                            disabled={loading}
-                        />
-
-                        <input
-                            type="text"
-                            placeholder="Location *"
-                            value={form.location}
-                            onChange={(e) => {
-                                setForm({ ...form, location: e.target.value });
-                                setError("");
-                            }}
-                            className="w-full p-3 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-[#b20000]"
-                            disabled={loading}
-                        />
-
-                        <input
-                            type="email"
-                            placeholder="Email (Optional)"
-                            value={form.email}
-                            onChange={(e) => {
-                                setForm({ ...form, email: e.target.value });
-                                setError("");
-                            }}
-                            className="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-[#b20000]"
-                            disabled={loading}
-                        />
-
-                        <div className="flex gap-2">
-                            <button
-                                onClick={() => {
-                                    setStep(2);
-                                    setError("");
-                                }}
-                                className="px-6 py-3 bg-gray-200 text-gray-700 rounded w-full hover:bg-gray-300"
-                                disabled={loading}
-                            >
-                                Back
-                            </button>
-                            <button
-                                onClick={handleSaveDetails}
-                                disabled={loading || !form.name || !form.business || !form.location}
-                                className="px-6 py-3 bg-[#b20000] text-white rounded w-full hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                            >
-                                {loading ? (
-                                    <>
-                                        <Loader2 className="w-5 h-5 animate-spin" />
-                                        Submitting...
-                                    </>
-                                ) : (
-                                    "Submit"
-                                )}
-                            </button>
-                        </div>
-                    </>
-                )}
-
-                {/* STEP 4 */}
-                {step === 4 && (
-                    <div className="text-center py-10">
+                {/* STEP 2: Success Message */}
+                {step === 2 && (
+                    <div className="text-center py-6">
                         <div className="mb-4">
                             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1100,15 +1250,25 @@ function Modal({ step, setStep, mobile, setMobile, otp, setOtp, form, setForm, l
                         <h2 className="text-3xl font-bold text-[#b20000] mb-4">
                             Thank You!
                         </h2>
-                         <p className="text-gray-700 text-lg mb-2">
+                        <p className="text-gray-700 text-lg mb-2">
+                            Your registration is complete.
+                        </p>
+                        <p className="text-gray-600 text-sm mb-8">
                             Kindly check the given link to grow your GBP.
                         </p>
-                        <p className="text-gray-600 text-sm mb-6">
-                        <a href="https://rw.luomo.co.in" target="_blank" rel="noopener noreferrer" className="text-[#b20000] hover:underline">https://rw.luomo.co.in</a>
-                        </p>
+                        <div className="bg-gray-50 p-4 rounded-lg mb-8 border border-gray-100">
+                            <a 
+                                href="https://rw.luomo.co.in" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="text-[#b20000] font-medium hover:underline break-all"
+                            >
+                                https://rw.luomo.co.in
+                            </a>
+                        </div>
                         <button
                             onClick={close}
-                            className="px-6 py-3 bg-[#b20000] text-white rounded hover:bg-red-700 transition"
+                            className="px-8 py-3 bg-[#b20000] text-white rounded-md font-semibold hover:bg-red-700 transition"
                         >
                             Close
                         </button>
@@ -1145,3 +1305,33 @@ function Step({ number, title, desc }) {
         </div>
     );
 }
+
+const FaqItem = ({ question, answer }) => {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+            <button
+                onClick={() => setOpen(!open)}
+                className="w-full flex items-center justify-between text-left px-6 py-5 font-semibold text-gray-900 hover:bg-gray-50 transition"
+            >
+                <span className="pr-4">{question}</span>
+                <ChevronDown
+                    className={`w-5 h-5 text-[#b20000] transition-transform duration-300 ${open ? "rotate-180" : ""
+                        }`}
+                />
+            </button>
+
+            <div
+                className={`grid transition-all duration-300 ease-in-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
+            >
+                <div className="overflow-hidden">
+                    <p className="px-6 pb-5 text-gray-600 leading-relaxed">
+                        {answer}
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+};
